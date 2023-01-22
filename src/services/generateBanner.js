@@ -32,47 +32,52 @@ export const generateBannerImage = async (data) => {
   const hourCordinateX = 540;
   const hourCordinateY = 920;
 
-  const addressCordinateX = 540;
-  const addressCordinateY = 1100;
+  const districtCordinateX = 540;
+  const districtCordinateY = 1080;
 
-  const contactCordinateX = 540;
-  const contactCordinateY = 1140;
+  const addressCordinateX = 540;
+  let addressCordinateY = 1095;
+
+  const lidershipCordinateX = 540;
+  let lidershipCordinateY = 1135;
+
+  const phoneCordinateX = 540;
+  let phoneCordinateY = 1175;
 
   const banner = {
     name: data.name,
     day: data.day,
     hour: data.hour,
+    district: data.district,
     address: data.address,
     phone: data.phone,
     lidership: data.lidership,
   };
 
   loadImage("./src/banners/banner-background.jpg").then((image) => {
-    // adds the base background
     context.drawImage(image, 0, 0);
     context.fillStyle = "#222222";
 
-    // add title
+    addGCName(banner.name.toUpperCase());
+    addGCDay(banner.day.toUpperCase());
+    addGCHour(banner.hour);
 
-    addTitle(banner.name.toUpperCase());
+    if (banner.district) {
+      addGCDistrict(banner.district);
+      addressCordinateY += 20;
+      lidershipCordinateY += 20;
+      phoneCordinateY += 20;
+    }
 
-    // add day
-    addDay(banner.day.toUpperCase());
-
-    // add hour
-    addHour(banner.hour);
-
-    // add address
-    addAdress(banner.address);
-
-    // add lider name and contact
-    addContact(`${banner.lidership} ${banner.phone}`);
+    addGCAdress(banner.address);
+    addGCLidership(banner.lidership);
+    addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
 
     // writes the final file on the root of the project
-    const bannerName = banner.name;
+    const bannerName = banner.name.toUpperCase();
     fileName = `${bannerName}.png`;
     fs.writeFileSync(
       `./src/banners/generatedBanners/${bannerName}.png`,
@@ -80,7 +85,7 @@ export const generateBannerImage = async (data) => {
     );
   });
 
-  function addTitle(gcName) {
+  function addGCName(gcName) {
     registerFont("./src/fonts/Denike-Regular.otf", {
       family: "Denike",
     });
@@ -89,7 +94,7 @@ export const generateBannerImage = async (data) => {
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
   }
 
-  function addDay(gcDay) {
+  function addGCDay(gcDay) {
     registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
@@ -98,7 +103,7 @@ export const generateBannerImage = async (data) => {
     context.fillText(gcDay, dayCordinateX, dayCordinateY);
   }
 
-  function addHour(gcHour) {
+  function addGCHour(gcHour) {
     registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
@@ -107,7 +112,16 @@ export const generateBannerImage = async (data) => {
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }
 
-  function addAdress(gcAdress) {
+  function addGCDistrict(gcDistrict) {
+    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
+      family: "Kanit",
+    });
+    context.font = "30px Kanit";
+    context.textAlign = "center";
+    context.fillText(gcDistrict, districtCordinateX, districtCordinateY);
+  }
+
+  function addGCAdress(gcAdress) {
     registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
@@ -121,12 +135,21 @@ export const generateBannerImage = async (data) => {
     );
   }
 
-  function addContact(gcContact) {
+  function addGCLidership(gcLidership) {
     registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
     context.font = "30px Maven Pro";
     context.textAlign = "center";
-    context.fillText(gcContact, contactCordinateX, contactCordinateY);
+    context.fillText(gcLidership, lidershipCordinateX, lidershipCordinateY);
+  }
+
+  function addGCPhone(phone) {
+    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
+      family: "Kanit",
+    });
+    context.font = "30px Kanit";
+    context.textAlign = "center";
+    context.fillText(phone, phoneCordinateX, phoneCordinateY);
   }
 };

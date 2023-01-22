@@ -26,17 +26,17 @@ export const generateBannerImage = async (data) => {
   const titleCordinateX = 540;
   const titleCordinateY = 730;
 
-  const dayCordinateX = 100;
-  const dayCordinateY = 420;
+  const dayCordinateX = 540;
+  const dayCordinateY = 890;
 
-  const hourCordinateX = 1000;
-  const hourCordinateY = 440;
+  const hourCordinateX = 540;
+  const hourCordinateY = 920;
 
-  const addressCordinateX = 555;
-  const addressCordinateY = 845;
+  const addressCordinateX = 540;
+  const addressCordinateY = 1100;
 
-  const contactCordinateX = 550;
-  const contactCordinateY = 900;
+  const contactCordinateX = 540;
+  const contactCordinateY = 1140;
 
   const banner = {
     name: data.name,
@@ -57,16 +57,16 @@ export const generateBannerImage = async (data) => {
     addTitle(banner.name);
 
     // add day
-    // addDay(banner.day);
+    addDay(banner.day);
 
     // add hour
-    // addHour(banner.hour);
+    addHour(banner.hour);
 
     // add address
-    // addAdress(banner.address);
+    addAdress(banner.address);
 
     // add lider name and contact
-    // addContact(`${banner.lidership} ${banner.phone}`);
+    addContact(`${banner.lidership} ${banner.phone}`);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
@@ -84,39 +84,34 @@ export const generateBannerImage = async (data) => {
     registerFont("./src/fonts/Denike-Regular.otf", {
       family: "Denike",
     });
-    context.font = "70px Denike";
+    context.font = "60px Denike";
     context.textAlign = "center";
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
   }
 
   function addDay(gcDay) {
-    registerFont("./src/controllers/banners/fonts/maven-bold.ttf", {
+    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
-    context.font = "50px Maven Pro";
-    context.textAlign = "left";
+    context.font = "30px Maven Pro";
+    context.textAlign = "center";
     context.fillText(gcDay, dayCordinateX, dayCordinateY);
-    context.fillText(gcDay, dayCordinateX, dayCordinateY + 40);
-    context.fillText(gcDay, dayCordinateX, dayCordinateY + 80);
-    context.fillText(gcDay, dayCordinateX, dayCordinateY + 120);
   }
 
   function addHour(gcHour) {
-    registerFont("./src/controllers/banners/fonts/kanit-bold.ttf", {
+    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
-    context.font = "74px Kanit";
-    context.textAlign = "right";
-    context.fillText("HORÁRIO", hourCordinateX, hourCordinateY);
-    context.font = "138px Kanit";
-    context.fillText(gcHour, hourCordinateX, hourCordinateY + 100);
+    context.font = "30px Kanit";
+    context.textAlign = "center";
+    context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }
 
   function addAdress(gcAdress) {
-    registerFont("./src/controllers/banners/fonts/abhaya-regular.ttf", {
-      family: "Abhaya Libre",
+    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
+      family: "Maven Pro",
     });
-    context.font = "50px Abhaya Libre";
+    context.font = "30px Maven Pro";
     context.textAlign = "center";
     context.fillText(
       gcAdress,
@@ -127,11 +122,11 @@ export const generateBannerImage = async (data) => {
   }
 
   function addContact(gcContact) {
-    registerFont("./src/controllers/banners/fonts/abhaya-regular.ttf", {
-      family: "Abhaya Libre",
+    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
+      family: "Maven Pro",
     });
-    context.font = "50px Abhaya Libre";
+    context.font = "30px Maven Pro";
     context.textAlign = "center";
-    context.fillText(gcContact, contactCordinateX, contactCordinateY, 1080);
+    context.fillText(gcContact, contactCordinateX, contactCordinateY);
   }
 };

@@ -54,10 +54,10 @@ export const generateBannerImage = async (data) => {
 
     // add title
 
-    addTitle(banner.name);
+    addTitle(banner.name.toUpperCase());
 
     // add day
-    addDay(banner.day);
+    addDay(banner.day.toUpperCase());
 
     // add hour
     addHour(banner.hour);

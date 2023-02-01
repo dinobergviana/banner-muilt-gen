@@ -1,48 +1,43 @@
 import { createCanvas, loadImage, registerFont } from "canvas";
 import fs from "fs";
 
-const BANNERS_PATH = "./src/banners/generatedBanners/";
 let fileName = "";
 
-export const generateBannerImage = async (data) => {
+export const generateBannerImageStories = async (data, path) => {
   // hour font
   registerFont("./src/fonts/Denike-Regular.otf", {
     family: "Denike",
   });
 
-  // OLD BANNER DIMENSIONS - FEED
-  const oldBannerWidth = 1080;
-  const oldBannerHeight = 1080;
-
-  // NEW BANNER DIMENSIONS
+  // NEW BANNER DIMENSIONS - STORIES
   const newBannerWidth = 1080;
-  const nnewBannerHeight = 1350;
+  const newBannerHeight = 1920;
 
-  const canvas = createCanvas(newBannerWidth, nnewBannerHeight);
+  const canvas = createCanvas(newBannerWidth, newBannerHeight);
   const context = canvas.getContext("2d");
 
-  context.fillRect(0, 0, newBannerWidth, nnewBannerHeight);
+  context.fillRect(0, 0, newBannerWidth, newBannerHeight);
 
   const titleCordinateX = 540;
-  const titleCordinateY = 730;
+  const titleCordinateY = 960;
 
   const dayCordinateX = 540;
-  const dayCordinateY = 890;
+  const dayCordinateY = 1140;
 
   const hourCordinateX = 540;
-  const hourCordinateY = 920;
+  const hourCordinateY = 1170;
 
   const districtCordinateX = 540;
-  const districtCordinateY = 1080;
+  const districtCordinateY = 1380;
 
   const addressCordinateX = 540;
-  let addressCordinateY = 1095;
+  let addressCordinateY = 1400;
 
   const lidershipCordinateX = 540;
-  let lidershipCordinateY = 1135;
+  let lidershipCordinateY = 1440;
 
   const phoneCordinateX = 540;
-  let phoneCordinateY = 1175;
+  let phoneCordinateY = 1480;
 
   const banner = {
     name: data.name,
@@ -54,7 +49,7 @@ export const generateBannerImage = async (data) => {
     lidership: data.lidership,
   };
 
-  loadImage("./src/banners/banner-background.jpg").then((image) => {
+  loadImage("./src/banners/banner-background-stories.jpg").then((image) => {
     context.drawImage(image, 0, 0);
     context.fillStyle = "#222222";
 
@@ -79,10 +74,7 @@ export const generateBannerImage = async (data) => {
     // writes the final file on the root of the project
     const bannerName = banner.name.toUpperCase();
     fileName = `${bannerName}.png`;
-    fs.writeFileSync(
-      `./src/banners/generatedBanners/${bannerName}.png`,
-      buffer
-    );
+    fs.writeFileSync(`${path}/${bannerName}.png`, buffer);
   });
 
   function addGCName(gcName) {

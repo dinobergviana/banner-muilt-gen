@@ -78,7 +78,7 @@ export const generateBannerImageFeed = async (data, path) => {
     // writes the final file on the root of the project
     const bannerName = banner.name.toUpperCase();
     fileName = `${bannerName}.png`;
-    fs.writeFileSync(`${path}/${bannerName}.png`, buffer);
+    fs.writeFileSync(`${path}/${bannerName} - FEED.png`, buffer);
   });
 
   function addGCName(gcName) {

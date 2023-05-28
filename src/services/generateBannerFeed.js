@@ -100,9 +100,15 @@ export const generateBannerImageFeed = async (data, path) => {
   }
 
   function addGCHour(gcHour) {
+    const hour = gcHour.split(":")[0];
+    const minutes = gcHour.split(":")[1];
+
+    gcHour = `${hour}h${minutes}`;
+
     registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
+
     context.font = "30px Kanit";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);

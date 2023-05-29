@@ -96,6 +96,11 @@ export const generateBannerImageStories = async (data, path) => {
   }
 
   function addGCHour(gcHour) {
+    const hour = gcHour.split(":")[0];
+    const minutes = gcHour.split(":")[1];
+
+    gcHour = `${hour}h${minutes}`;
+
     registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
@@ -137,11 +142,17 @@ export const generateBannerImageStories = async (data, path) => {
   }
 
   function addGCPhone(phone) {
+    const phoneRegex =
+      /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)(?:((?:9\s?\d|[2-9])\d{3})\-?(\d{4}))$/;
+
+    const phoneNumberArray = phoneRegex.exec(phone);
+    const formattedPhone = `(${phoneNumberArray[2]}) ${phoneNumberArray[3]}-${phoneNumberArray[4]}`;
+
     registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
     context.font = "30px Kanit";
     context.textAlign = "center";
-    context.fillText(phone, phoneCordinateX, phoneCordinateY);
+    context.fillText(formattedPhone, phoneCordinateX, phoneCordinateY);
   }
 };

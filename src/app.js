@@ -1,10 +1,10 @@
 import fs from "fs";
 import csv from "csv-parser";
 
-import { generateBannerImageFeed } from "./services/generateBannerFeed.js";
-import { generateBannerImageStories } from "./services/generateBannerStories.js";
+import { generateBannerImageFeed } from "./services/v2/generateBannerFeed.js";
+import { generateBannerImageStories } from "./services/v2/generateBannerStories.js";
 
-const PATH_BANNERS = "./src/banners/generatedBanners";
+const PATH_BANNERS = "./src/banners/generated-banners";
 
 let gcInfo = [];
 

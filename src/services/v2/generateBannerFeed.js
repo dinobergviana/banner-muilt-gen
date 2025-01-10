@@ -3,12 +3,36 @@ import fs from "fs";
 
 let fileName = "";
 
-export const generateBannerImageFeed = async (data, path) => {
-  // hour font
-  registerFont("./src/fonts/Denike-Regular.otf", {
-    family: "Denike",
-  });
+const CORDINATES = {
+  SEGUNDA: {
+    TITLE: {
+      EIXO_X: 540,
+      EIXO_Y: 730,
+    },
+    HOUR: {
+      EIXO_X: 650,
+      EIXO_Y: 858,
+    },
+  },
+  TERCA: {
+    EIXO_X: "",
+    EIXO_Y: "",
+  },
+  QUINTA: {
+    EIXO_X: "",
+    EIXO_Y: "",
+  },
+  SEXTA: {
+    EIXO_X: "",
+    EIXO_Y: "",
+  },
+  SABADO: {
+    EIXO_X: "",
+    EIXO_Y: "",
+  },
+};
 
+export const generateBannerImageFeed = async (data, path) => {
   // NEW BANNER DIMENSIONS - FEED
   const newBannerWidth = 1080;
   const newBannerHeight = 1080;
@@ -18,14 +42,11 @@ export const generateBannerImageFeed = async (data, path) => {
 
   context.fillRect(0, 0, newBannerWidth, newBannerHeight);
 
-  const titleCordinateX = 540;
-  const titleCordinateY = 730;
+  const titleCordinateX = CORDINATES.SEGUNDA.TITLE.EIXO_X;
+  const titleCordinateY = CORDINATES.SEGUNDA.TITLE.EIXO_Y;
 
-  const dayCordinateX = 540;
-  const dayCordinateY = 890;
-
-  const hourCordinateX = 540;
-  const hourCordinateY = 920;
+  const hourCordinateX = CORDINATES.SEGUNDA.HOUR.EIXO_X;
+  const hourCordinateY = CORDINATES.SEGUNDA.HOUR.EIXO_Y;
 
   const districtCordinateX = 540;
   const districtCordinateY = 1080;
@@ -54,8 +75,7 @@ export const generateBannerImageFeed = async (data, path) => {
     context.fillStyle = "#222222";
 
     addGCName(banner.name.toUpperCase());
-    // addGCDay(banner.day.toUpperCase());
-    // addGCHour(banner.hour);
+    addGCHour(banner.hour);
 
     // if (banner.district) {
     //   addGCDistrict(banner.district);
@@ -78,34 +98,28 @@ export const generateBannerImageFeed = async (data, path) => {
   });
 
   function addGCName(gcName) {
-    registerFont("./src/fonts/Denike-Regular.otf", {
-      family: "Denike",
+    registerFont("./src/fonts/v2/NeueHaasDisplayRoman.ttf", {
+      family: "Roman",
+      weight: "bold",
     });
-    context.font = "60px Denike";
+    context.fillStyle = "#ffffff";
+    context.font = "55px Roman";
     context.textAlign = "center";
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
-  }
-
-  function addGCDay(gcDay) {
-    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
-      family: "Maven Pro",
-    });
-    context.font = "30px Maven Pro";
-    context.textAlign = "center";
-    context.fillText(gcDay, dayCordinateX, dayCordinateY);
   }
 
   function addGCHour(gcHour) {
     const hour = gcHour.split(":")[0];
     const minutes = gcHour.split(":")[1];
 
-    gcHour = `${hour}h${minutes}`;
+    gcHour = `${hour}H${minutes}`;
 
-    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
-      family: "Kanit",
+    registerFont("./src/fonts/v2/NeueHaasDisplayBold.ttf", {
+      family: "Roman",
     });
 
-    context.font = "30px Kanit";
+    context.fillStyle = "#000";
+    context.font = "38px Roman";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }

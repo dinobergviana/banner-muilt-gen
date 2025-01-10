@@ -49,14 +49,14 @@ const readAndSaveCSVFile = async () => {
         }
       });
 
-      gcInfo.forEach((gc) => {
-        try {
-          generateBannerImageStories(gc, PATH_BANNERS);
-          updateProgress();
-        } catch (error) {
-          handleError(error, "Stories", gc);
-        }
-      });
+      // gcInfo.forEach((gc) => {
+      //   try {
+      //     generateBannerImageStories(gc, PATH_BANNERS);
+      //     updateProgress();
+      //   } catch (error) {
+      //     handleError(error, "Stories", gc);
+      //   }
+      // });
 
       process.stdout.write("\nAguardando a liberação do terminal...\n");
     });

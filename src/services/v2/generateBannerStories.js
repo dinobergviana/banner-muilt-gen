@@ -3,15 +3,20 @@ import fs from "fs";
 
 let fileName = "";
 
-export const generateBannerImageStories = async (data, path) => {
-  // hour font
-  registerFont("./src/fonts/Denike-Regular.otf", {
-    family: "Denike",
-  });
+const TITLE_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayRoman.ttf`;
+const HOUR_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayBold.ttf`;
 
+const registerFontFunction = (path, isBold) => {
+  registerFont(path, {
+    family: "Roman",
+    weight: "bold",
+  });
+};
+
+export const generateBannerImageStories = async (data, path) => {
   // NEW BANNER DIMENSIONS - STORIES
   const newBannerWidth = 1080;
-  const newBannerHeight = 1920;
+  const newBannerHeight = 1820;
 
   const canvas = createCanvas(newBannerWidth, newBannerHeight);
   const context = canvas.getContext("2d");
@@ -19,13 +24,10 @@ export const generateBannerImageStories = async (data, path) => {
   context.fillRect(0, 0, newBannerWidth, newBannerHeight);
 
   const titleCordinateX = 540;
-  const titleCordinateY = 960;
+  const titleCordinateY = 1080;
 
-  const dayCordinateX = 540;
-  const dayCordinateY = 1140;
-
-  const hourCordinateX = 540;
-  const hourCordinateY = 1170;
+  const hourCordinateX = 666;
+  const hourCordinateY = 1460;
 
   const districtCordinateX = 540;
   const districtCordinateY = 1380;
@@ -49,24 +51,23 @@ export const generateBannerImageStories = async (data, path) => {
     lidership: data.lidership,
   };
 
-  loadImage("./src/banners/banner-background-stories.jpg").then((image) => {
+  loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
     context.drawImage(image, 0, 0);
     context.fillStyle = "#222222";
 
     addGCName(banner.name.toUpperCase());
-    addGCDay(banner.day.toUpperCase());
     addGCHour(banner.hour);
 
-    if (banner.district) {
-      addGCDistrict(banner.district);
-      addressCordinateY += 20;
-      lidershipCordinateY += 20;
-      phoneCordinateY += 20;
-    }
+    // if (banner.district) {
+    //   addGCDistrict(banner.district);
+    //   addressCordinateY += 20;
+    //   lidershipCordinateY += 20;
+    //   phoneCordinateY += 20;
+    // }
 
-    addGCAdress(banner.address);
-    addGCLidership(banner.lidership);
-    addGCPhone(banner.phone);
+    // addGCAdress(banner.address);
+    // addGCLidership(banner.lidership);
+    // addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
@@ -78,33 +79,25 @@ export const generateBannerImageStories = async (data, path) => {
   });
 
   function addGCName(gcName) {
-    registerFont("./src/fonts/Denike-Regular.otf", {
-      family: "Denike",
-    });
-    context.font = "60px Denike";
+    context.font = "60px Roman";
+    context.fillStyle = "#fff";
     context.textAlign = "center";
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
   }
 
-  function addGCDay(gcDay) {
-    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
-      family: "Maven Pro",
-    });
-    context.font = "30px Maven Pro";
-    context.textAlign = "center";
-    context.fillText(gcDay, dayCordinateX, dayCordinateY);
-  }
-
   function addGCHour(gcHour) {
+    registerFont("./src/fonts/v2/NeueHaasDisplayBlack.ttf", {
+      family: "Roman",
+      weight: "bold",
+    });
+
     const hour = gcHour.split(":")[0];
     const minutes = gcHour.split(":")[1];
 
-    gcHour = `${hour}h${minutes}`;
+    gcHour = `${hour}H${minutes}`;
 
-    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
-      family: "Kanit",
-    });
-    context.font = "30px Kanit";
+    context.fillStyle = "#000";
+    context.font = "44px";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }
@@ -128,7 +121,7 @@ export const generateBannerImageStories = async (data, path) => {
       gcAdress,
       addressCordinateX,
       addressCordinateY,
-      newBannerWidth
+      newBannerWidth,
     );
   }
 

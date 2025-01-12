@@ -40,23 +40,23 @@ const readAndSaveCSVFile = async () => {
         console.error(`Detalhes do erro: ${error.message}`);
       };
 
-      gcInfo.forEach((gc) => {
-        try {
-          generateBannerImageFeed(gc, PATH_BANNERS);
-          updateProgress();
-        } catch (error) {
-          handleError(error, "Feed", gc);
-        }
-      });
-
       // gcInfo.forEach((gc) => {
       //   try {
-      //     generateBannerImageStories(gc, PATH_BANNERS);
+      //     generateBannerImageFeed(gc, PATH_BANNERS);
       //     updateProgress();
       //   } catch (error) {
-      //     handleError(error, "Stories", gc);
+      //     handleError(error, "Feed", gc);
       //   }
       // });
+
+      gcInfo.forEach((gc) => {
+        try {
+          generateBannerImageStories(gc, PATH_BANNERS);
+          updateProgress();
+        } catch (error) {
+          handleError(error, "Stories", gc);
+        }
+      });
 
       process.stdout.write("\nAguardando a liberação do terminal...\n");
     });

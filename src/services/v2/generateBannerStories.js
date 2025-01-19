@@ -48,11 +48,14 @@ export const generateBannerImageStories = async (data, path) => {
   const addressCordinateX = 540 + 60;
   let addressCordinateY = 1700;
 
-  const lidershipCordinateX = 540 - 170;
-  let lidershipCordinateY = 1620;
+  const lidershipCordinateX = 540 - 160;
+  let lidershipCordinateY = 1630;
+
+  const dotCordinateX = 540;
+  let dotCordinateY = 1630;
 
   const phoneCordinateX = 540 + 170;
-  let phoneCordinateY = 1620;
+  let phoneCordinateY = 1630;
 
   loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
     context.drawImage(image, 0, 0);

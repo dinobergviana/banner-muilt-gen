@@ -5,12 +5,13 @@ let fileName = "";
 
 import { CORDINATES } from "../../consts/cordinates.js";
 
-const TITLE_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayRoman.ttf`;
+const TITLE_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayLight.ttf`;
 const HOUR_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayBold.ttf`;
 
-const registerFontFunction = (path, isBold) => {
+const registerFontFunction = (path, family, weight) => {
   registerFont(path, {
-    family: "Roman",
+    family,
+    weight,
   });
 };
 
@@ -59,12 +60,12 @@ export const generateBannerImageFeed = async (data, path) => {
     addGCName(banner.name.toUpperCase());
     addGCHour(banner.hour);
 
-    if (banner.district) {
-      addGCDistrict(banner.district);
-      addressCordinateY += 20;
-      lidershipCordinateY += 20;
-      phoneCordinateY += 20;
-    }
+    // if (banner.district) {
+    //   addGCDistrict(banner.district);
+    //   addressCordinateY += 20;
+    //   lidershipCordinateY += 20;
+    //   phoneCordinateY += 20;
+    // }
 
     // addGCAdress(banner.address);
     // addGCLidership(banner.lidership);
@@ -80,7 +81,7 @@ export const generateBannerImageFeed = async (data, path) => {
   });
 
   function addGCName(gcName) {
-    registerFontFunction(TITLE_FONT_PATH, false);
+    registerFontFunction("./src/fonts/v2/NeueHaasDisplayRoman.ttf", "", "");
 
     context.fillStyle = "#ffffff";
     context.font = "55px Roman";
@@ -89,7 +90,11 @@ export const generateBannerImageFeed = async (data, path) => {
   }
 
   function addGCHour(gcHour) {
-    registerFontFunction(HOUR_FONT_PATH, true);
+    registerFontFunction(
+      "./src/fonts/helvetica/Helvetica-Bold.ttf",
+      "",
+      "bold",
+    );
 
     const hour = gcHour.split(":")[0];
     const minutes = gcHour.split(":")[1];
@@ -97,7 +102,7 @@ export const generateBannerImageFeed = async (data, path) => {
     gcHour = `${hour}H${minutes}`;
 
     context.fillStyle = "#000";
-    context.font = "38px Roman";
+    context.font = "44px Helvetica";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }

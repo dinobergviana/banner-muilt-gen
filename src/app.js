@@ -40,14 +40,14 @@ const readAndSaveCSVFile = async () => {
         console.error(`Detalhes do erro: ${error.message}`);
       };
 
-      // gcInfo.forEach((gc) => {
-      //   try {
-      //     generateBannerImageFeed(gc, PATH_BANNERS);
-      //     updateProgress();
-      //   } catch (error) {
-      //     handleError(error, "Feed", gc);
-      //   }
-      // });
+      gcInfo.forEach((gc) => {
+        try {
+          generateBannerImageFeed(gc, PATH_BANNERS);
+          updateProgress();
+        } catch (error) {
+          handleError(error, "Feed", gc);
+        }
+      });
 
       gcInfo.forEach((gc) => {
         try {

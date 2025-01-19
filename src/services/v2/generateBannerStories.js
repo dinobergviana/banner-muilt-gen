@@ -6,10 +6,10 @@ let fileName = "";
 const TITLE_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayRoman.ttf`;
 const HOUR_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayBold.ttf`;
 
-const registerFontFunction = (path, isBold) => {
+const registerFontFunction = (path, family, weight) => {
   registerFont(path, {
-    family: "Roman",
-    weight: "bold",
+    family,
+    weight,
   });
 };
 
@@ -26,8 +26,8 @@ export const generateBannerImageStories = async (data, path) => {
   const titleCordinateX = 540;
   const titleCordinateY = 1080;
 
-  const hourCordinateX = 666;
-  const hourCordinateY = 1460;
+  const hourCordinateX = 656;
+  const hourCordinateY = 1462;
 
   const districtCordinateX = 540;
   const districtCordinateY = 1380;
@@ -79,6 +79,8 @@ export const generateBannerImageStories = async (data, path) => {
   });
 
   function addGCName(gcName) {
+    registerFontFunction("./src/fonts/v2/NeueHaasDisplayRoman.ttf", "", "");
+
     context.font = "60px Roman";
     context.fillStyle = "#fff";
     context.textAlign = "center";
@@ -86,10 +88,16 @@ export const generateBannerImageStories = async (data, path) => {
   }
 
   function addGCHour(gcHour) {
-    registerFont("./src/fonts/v2/NeueHaasDisplayBlack.ttf", {
-      family: "Roman",
-      weight: "bold",
-    });
+    // registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
+    //   family: "Helvetica",
+    //   weight: "bold",
+    // });
+
+    registerFontFunction(
+      "./src/fonts/helvetica/Helvetica-Bold.ttf",
+      "",
+      "bold",
+    );
 
     const hour = gcHour.split(":")[0];
     const minutes = gcHour.split(":")[1];
@@ -97,7 +105,7 @@ export const generateBannerImageStories = async (data, path) => {
     gcHour = `${hour}H${minutes}`;
 
     context.fillStyle = "#000";
-    context.font = "44px";
+    context.font = "50px Helvetica";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
   }

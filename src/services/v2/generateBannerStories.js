@@ -14,6 +14,16 @@ const registerFontFunction = (path, family, weight) => {
 };
 
 export const generateBannerImageStories = async (data, path) => {
+  const banner = {
+    name: data.name,
+    day: data.day,
+    hour: data.hour,
+    district: data.district,
+    address: data.address,
+    phone: data.phone,
+    lidership: data.lidership,
+  };
+
   // NEW BANNER DIMENSIONS - STORIES
   const newBannerWidth = 1080;
   const newBannerHeight = 1820;
@@ -30,26 +40,19 @@ export const generateBannerImageStories = async (data, path) => {
   const hourCordinateY = 1462;
 
   const districtCordinateX = 540;
-  const districtCordinateY = 1380;
+  const districtCordinateY = 1580;
 
-  const addressCordinateX = 540;
-  let addressCordinateY = 1400;
+  const localCordinateX = 540 - 200;
+  let localCordinateY = 1700;
 
-  const lidershipCordinateX = 540;
-  let lidershipCordinateY = 1440;
+  const addressCordinateX = 540 + 60;
+  let addressCordinateY = 1700;
 
-  const phoneCordinateX = 540;
-  let phoneCordinateY = 1480;
+  const lidershipCordinateX = 540 - 170;
+  let lidershipCordinateY = 1620;
 
-  const banner = {
-    name: data.name,
-    day: data.day,
-    hour: data.hour,
-    district: data.district,
-    address: data.address,
-    phone: data.phone,
-    lidership: data.lidership,
-  };
+  const phoneCordinateX = 540 + 170;
+  let phoneCordinateY = 1620;
 
   loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
     context.drawImage(image, 0, 0);
@@ -57,17 +60,16 @@ export const generateBannerImageStories = async (data, path) => {
 
     addGCName(banner.name.toUpperCase());
     addGCHour(banner.hour);
+    addGCDistrict(banner.district);
 
-    // if (banner.district) {
-    //   addGCDistrict(banner.district);
-    //   addressCordinateY += 20;
-    //   lidershipCordinateY += 20;
-    //   phoneCordinateY += 20;
-    // }
+    if (!banner.address) {
+    } else {
+      addLocal();
+      addGCAdress(banner.address);
+    }
 
-    // addGCAdress(banner.address);
-    // addGCLidership(banner.lidership);
-    // addGCPhone(banner.phone);
+    addGCLidership(banner.lidership);
+    addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
@@ -111,19 +113,34 @@ export const generateBannerImageStories = async (data, path) => {
   }
 
   function addGCDistrict(gcDistrict) {
-    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
-      family: "Kanit",
-    });
-    context.font = "30px Kanit";
+    registerFontFunction(
+      "./src/fonts/v2/NeueHaasDisplayBlack.ttf",
+      "Roman",
+      "bold",
+    );
+
+    context.font = "40px Roman";
     context.textAlign = "center";
     context.fillText(gcDistrict, districtCordinateX, districtCordinateY);
+  }
+
+  function addLocal() {
+    registerFontFunction(
+      "./src/fonts/v2/NeueHaasDisplayBlack.ttf",
+      "Roman",
+      "bold",
+    );
+
+    context.font = "40px Roman";
+    context.textAlign = "center";
+    context.fillText("Local:", localCordinateX, localCordinateY);
   }
 
   function addGCAdress(gcAdress) {
     registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
-    context.font = "30px Maven Pro";
+    context.font = "38px Maven Pro";
     context.textAlign = "center";
     context.fillText(
       gcAdress,
@@ -137,7 +154,7 @@ export const generateBannerImageStories = async (data, path) => {
     registerFont("./src/fonts/MonumentExtended-Regular.otf", {
       family: "Maven Pro",
     });
-    context.font = "30px Maven Pro";
+    context.font = "38px Maven Pro";
     context.textAlign = "center";
     context.fillText(gcLidership, lidershipCordinateX, lidershipCordinateY);
   }
@@ -152,7 +169,7 @@ export const generateBannerImageStories = async (data, path) => {
     registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
       family: "Kanit",
     });
-    context.font = "30px Kanit";
+    context.font = "36px Kanit";
     context.textAlign = "center";
     context.fillText(phone, phoneCordinateX, phoneCordinateY);
   }

@@ -1,4 +1,9 @@
-import { createCanvas, loadImage, registerFont } from "canvas";
+import {
+  createCanvas,
+  loadImage,
+  registerFont,
+  deregisterAllFonts,
+} from "canvas";
 import fs from "fs";
 
 let fileName = "";
@@ -36,7 +41,7 @@ export const generateBannerImageStories = async (data, path) => {
   const titleCordinateX = 540;
   const titleCordinateY = 1080;
 
-  const hourCordinateX = 656;
+  const hourCordinateX = 660;
   const hourCordinateY = 1462;
 
   const districtCordinateX = 540;
@@ -59,7 +64,7 @@ export const generateBannerImageStories = async (data, path) => {
   let basePosition = 520;
 
   if (isLidershipNameSmallerThanDistrict) {
-    basePosition = 490;
+    basePosition = 450;
   }
 
   let lidershipCordinateX =
@@ -69,7 +74,7 @@ export const generateBannerImageStories = async (data, path) => {
   const dotCordinateX = 540;
   let dotCordinateY = 1630;
 
-  let phoneCordinateX = 720;
+  let phoneCordinateX = 700;
   // banner.lidership.length * (banner.lidership.length % 10);
   let phoneCordinateY = 1630;
 
@@ -82,6 +87,8 @@ export const generateBannerImageStories = async (data, path) => {
   // }
 
   loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
+    deregisterAllFonts();
+
     context.drawImage(image, 0, 0);
     context.fillStyle = "#222222";
 
@@ -99,7 +106,7 @@ export const generateBannerImageStories = async (data, path) => {
     }
 
     addGCLidership(banner.lidership);
-    // addGCPhone(banner.phone);
+    addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
@@ -111,96 +118,111 @@ export const generateBannerImageStories = async (data, path) => {
   });
 
   function addGCName(gcName) {
-    registerFontFunction("./src/fonts/v2/NeueHaasDisplayRoman.ttf", "", "");
+    registerFont("./src/fonts/helvetica/Helvetica-Light.ttf", {
+      family: "",
+      weight: "",
+    });
 
-    context.font = "60px Roman";
+    context.font = "60px Helvetica Light";
     context.fillStyle = "#fff";
     context.textAlign = "center";
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
+
+    deregisterAllFonts();
   }
 
   function addGCHour(gcHour) {
-    // registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
-    //   family: "Helvetica",
-    //   weight: "bold",
-    // });
-
-    registerFontFunction(
-      "./src/fonts/helvetica/Helvetica-Bold.ttf",
-      "",
-      "bold",
-    );
+    registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
+      family: "",
+      weight: "",
+    });
 
     const hour = gcHour.split(":")[0];
     const minutes = gcHour.split(":")[1];
 
     gcHour = `${hour}H${minutes}`;
 
+    context.font = "48px Helvetica";
     context.fillStyle = "#000";
-    context.font = "50px Helvetica";
     context.textAlign = "center";
     context.fillText(gcHour, hourCordinateX, hourCordinateY);
+
+    deregisterAllFonts();
   }
 
   function addGCDistrict(gcDistrict) {
-    registerFontFunction(
-      "./src/fonts/v2/NeueHaasDisplayBlack.ttf",
-      "Roman",
-      "bold",
-    );
+    registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
+      family: "",
+      weight: "bold",
+    });
 
-    context.font = "40px Roman";
+    context.font = "40px Helvetica";
     context.textAlign = "center";
     context.fillText(gcDistrict, districtCordinateX, districtCordinateY);
+
+    deregisterAllFonts();
   }
 
   function addLocal() {
-    registerFontFunction(
-      "./src/fonts/v2/NeueHaasDisplayBlack.ttf",
-      "Roman",
-      "bold",
-    );
+    registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
+      family: "",
+      weight: "bold",
+    });
 
-    context.font = "40px Roman";
+    context.font = "40px Helvetica";
     context.textAlign = "center";
     context.fillText("Local:", localCordinateX, localCordinateY);
+
+    deregisterAllFonts();
   }
 
   function addGCAdress(gcAdress) {
-    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
-      family: "Maven Pro",
+    registerFont("./src/fonts/helvetica/Helvetica.ttf", {
+      family: "",
+      weight: "",
     });
-    context.font = "38px Maven Pro";
+
+    context.font = "38px Helvetica";
     context.textAlign = "center";
+
     context.fillText(
       gcAdress,
       addressCordinateX,
       addressCordinateY,
       newBannerWidth,
     );
+
+    deregisterAllFonts();
   }
 
   function addGCLidership(gcLidership) {
-    registerFont("./src/fonts/MonumentExtended-Regular.otf", {
-      family: "Maven Pro",
+    // registerFont("./src/fonts/v2/NeueHaasDisplayLight.ttf", {
+    //   family: "",
+    //   weight: "",
+    // });
+
+    registerFont("./src/fonts/helvetica/Helvetica.ttf", {
+      family: "",
+      weight: "",
     });
-    context.font = "38px Maven Pro";
+
+    context.font = "38px Helvetica";
     context.textAlign = "center";
     context.fillText(gcLidership, lidershipCordinateX, lidershipCordinateY);
+
+    deregisterAllFonts();
   }
 
   function addGCPhone(phone) {
-    // const phoneRegex =
-    //   /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)(?:((?:9\s?\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-    // const phoneNumberArray = phoneRegex.exec(phone);
-    // const formattedPhone = `(${phoneNumberArray[2]}) ${phoneNumberArray[3]}-${phoneNumberArray[4]}`;
-
-    registerFont("./src/fonts/MonumentExtended-Ultrabold.otf", {
-      family: "Kanit",
+    registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
+      family: "",
+      weight: "",
     });
-    context.font = "36px Kanit";
+
+    context.font = "36px Helvetica";
     context.textAlign = "center";
     context.fillText(phone, phoneCordinateX, phoneCordinateY);
+
+    deregisterAllFonts();
   }
 };

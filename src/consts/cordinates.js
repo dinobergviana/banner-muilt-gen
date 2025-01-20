@@ -115,15 +115,16 @@ export const CORDINATES_STORIES = {
   SEGUNDA: {
     TITLE: {
       EIXO_X: 540,
-      EIXO_Y: 730,
+      EIXO_Y: 1080,
+      COLOR: "#fff",
     },
     HOUR: {
-      EIXO_X: 640,
-      EIXO_Y: 858,
+      EIXO_X: 660,
+      EIXO_Y: 1462,
     },
     DISTRICT: {
-      EIXO_X: "",
-      EIXO_Y: "",
+      EIXO_X: 540,
+      EIXO_Y: 1580,
     },
     ADDRESS: {
       EIXO_X: "",
@@ -137,7 +138,8 @@ export const CORDINATES_STORIES = {
   TERCA: {
     TITLE: {
       EIXO_X: 540,
-      EIXO_Y: 730,
+      EIXO_Y: 1080,
+      COLOR: "#000",
     },
     HOUR: {
       EIXO_X: 650,
@@ -159,7 +161,8 @@ export const CORDINATES_STORIES = {
   QUINTA: {
     TITLE: {
       EIXO_X: 540,
-      EIXO_Y: 730,
+      EIXO_Y: 1080,
+      COLOR: "#000",
     },
     HOUR: {
       EIXO_X: 650,
@@ -181,7 +184,8 @@ export const CORDINATES_STORIES = {
   SEXTA: {
     TITLE: {
       EIXO_X: 540,
-      EIXO_Y: 730,
+      EIXO_Y: 1080,
+      COLOR: "#000",
     },
     HOUR: {
       EIXO_X: 650,
@@ -203,7 +207,8 @@ export const CORDINATES_STORIES = {
   SABADO: {
     TITLE: {
       EIXO_X: 540,
-      EIXO_Y: 730,
+      EIXO_Y: 1080,
+      COLOR: "#000",
     },
     HOUR: {
       EIXO_X: 650,

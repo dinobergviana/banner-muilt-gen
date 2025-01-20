@@ -6,6 +6,9 @@ import {
 } from "canvas";
 import fs from "fs";
 
+import { DAYS } from "../../consts/days.js";
+import { CORDINATES_STORIES } from "../../consts/cordinates.js";
+
 let fileName = "";
 
 const TITLE_FONT_PATH = `./src/fonts/v2/NeueHaasDisplayRoman.ttf`;
@@ -29,6 +32,10 @@ export const generateBannerImageStories = async (data, path) => {
     lidership: data.lidership,
   };
 
+  const daysKeys = Object.keys(DAYS);
+  const values = Object.values(DAYS);
+  const dayIndex = values.findIndex((day) => day === banner.day);
+
   // NEW BANNER DIMENSIONS - STORIES
   const newBannerWidth = 1080;
   const newBannerHeight = 1820;
@@ -38,14 +45,16 @@ export const generateBannerImageStories = async (data, path) => {
 
   context.fillRect(0, 0, newBannerWidth, newBannerHeight);
 
-  const titleCordinateX = 540;
-  const titleCordinateY = 1080;
+  const titleCordinateX = CORDINATES_STORIES[daysKeys[dayIndex]].TITLE.EIXO_X;
+  const titleCordinateY = CORDINATES_STORIES[daysKeys[dayIndex]].TITLE.EIXO_Y;
 
-  const hourCordinateX = 660;
-  const hourCordinateY = 1462;
+  const hourCordinateX = CORDINATES_STORIES[daysKeys[dayIndex]].HOUR.EIXO_X;
+  const hourCordinateY = CORDINATES_STORIES[daysKeys[dayIndex]].HOUR.EIXO_Y;
 
-  const districtCordinateX = 540;
-  const districtCordinateY = 1580;
+  const districtCordinateX =
+    CORDINATES_STORIES[daysKeys[dayIndex]].DISTRICT.EIXO_X;
+  const districtCordinateY =
+    CORDINATES_STORIES[daysKeys[dayIndex]].DISTRICT.EIXO_Y;
 
   let localCordinateX = 540;
   let localCordinateY = 1580;
@@ -61,7 +70,7 @@ export const generateBannerImageStories = async (data, path) => {
   const isLidershipNameSmallerThanDistrict =
     banner.lidership.length < banner.district.length;
 
-  let basePosition = 520;
+  let basePosition = 560;
 
   if (isLidershipNameSmallerThanDistrict) {
     basePosition = 450;
@@ -71,42 +80,38 @@ export const generateBannerImageStories = async (data, path) => {
     basePosition - banner.district.length - banner.lidership.length * 10;
   let lidershipCordinateY = 1630;
 
-  const dotCordinateX = 540;
-  let dotCordinateY = 1630;
-
-  let phoneCordinateX = 700;
-  // banner.lidership.length * (banner.lidership.length % 10);
+  let phoneCordinateX = 680;
   let phoneCordinateY = 1630;
 
-  console.log(banner.lidership, lidershipCordinateX);
-  console.log(banner.phone, phoneCordinateX);
-  console.log(banner.name);
+  // console.log(banner.lidership, lidershipCordinateX);
+  // console.log(banner.phone, phoneCordinateX);
+  // console.log(banner.name);
 
-  // if (!banner.address) {
-  //   phoneCordinateX += banner.district.length * 12;
-  // }
+  let templatePath = "";
 
-  loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
+  templatePath = `./src/banners/template-v2/${daysKeys[dayIndex]} - STORY.jpg`;
+
+  loadImage(templatePath).then((image) => {
     deregisterAllFonts();
 
     context.drawImage(image, 0, 0);
     context.fillStyle = "#222222";
 
     addGCName(banner.name.toUpperCase());
-    addGCHour(banner.hour);
-    addGCDistrict(banner.district);
+    // addGCHour(banner.hour);
+    // addGCDistrict(banner.district);
 
-    if (banner.address) {
-      localCordinateY += 50;
-      addressCordinateY += 50;
-      lidershipCordinateY += 50;
-      phoneCordinateY += 50;
-      addLocal();
-      addGCAdress(banner.address);
-    }
+    // if (banner.address) {
+    //   localCordinateY += 50;
+    //   addressCordinateY += 50;
+    //   lidershipCordinateY += 50;
+    //   phoneCordinateY += 50;
+    //   addLocal();
+    //   addGCAdress(banner.address);
+    // }
 
-    addGCLidership(banner.lidership);
-    addGCPhone(banner.phone);
+    // addGCLidership(banner.lidership);
+    // addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");
@@ -124,7 +129,7 @@ export const generateBannerImageStories = async (data, path) => {
     });
 
     context.font = "60px Helvetica Light";
-    context.fillStyle = "#fff";
+    context.fillStyle = CORDINATES_STORIES[daysKeys[dayIndex]].TITLE.COLOR;
     context.textAlign = "center";
     context.fillText(gcName, titleCordinateX, titleCordinateY, newBannerWidth);
 
@@ -134,7 +139,7 @@ export const generateBannerImageStories = async (data, path) => {
   function addGCHour(gcHour) {
     registerFont("./src/fonts/helvetica/Helvetica-Bold.ttf", {
       family: "",
-      weight: "",
+      weight: "bold",
     });
 
     const hour = gcHour.split(":")[0];

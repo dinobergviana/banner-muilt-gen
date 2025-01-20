@@ -1,4 +1,4 @@
-const DAYS = {
+export const DAYS = {
   SEGUNDA: "SEGUNDA",
   TERCA: "TERÇA",
   QUINTA: "QUINTA",

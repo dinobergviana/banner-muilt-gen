@@ -56,7 +56,7 @@ export const generateBannerImageStories = async (data, path) => {
   const districtCordinateY =
     CORDINATES_STORIES[daysKeys[dayIndex]].DISTRICT.EIXO_Y;
 
-  let localCordinateX = 540;
+  let localCordinateX = 580;
   let localCordinateY = 1580;
 
   let addressCordinateX = 540;
@@ -70,17 +70,17 @@ export const generateBannerImageStories = async (data, path) => {
   const isLidershipNameSmallerThanDistrict =
     banner.lidership.length < banner.district.length;
 
-  let basePosition = 560;
+  let basePosition = 600;
 
   if (isLidershipNameSmallerThanDistrict) {
-    basePosition = 450;
+    basePosition = 440;
   }
 
   let lidershipCordinateX =
     basePosition - banner.district.length - banner.lidership.length * 10;
   let lidershipCordinateY = 1630;
 
-  let phoneCordinateX = 680;
+  let phoneCordinateX = 710;
   let phoneCordinateY = 1630;
 
   // console.log(banner.lidership, lidershipCordinateX);
@@ -101,17 +101,17 @@ export const generateBannerImageStories = async (data, path) => {
     addGCHour(banner.hour);
     addGCDistrict(banner.district);
 
-    // if (banner.address) {
-    //   localCordinateY += 50;
-    //   addressCordinateY += 50;
-    //   lidershipCordinateY += 50;
-    //   phoneCordinateY += 50;
-    //   addLocal();
-    //   addGCAdress(banner.address);
-    // }
+    if (banner.address) {
+      localCordinateY += 50;
+      addressCordinateY += 50;
+      lidershipCordinateY += 50;
+      phoneCordinateY += 50;
+      addLocal();
+      addGCAdress(banner.address);
+    }
 
-    // addGCLidership(banner.lidership);
-    // addGCPhone(banner.phone);
+    addGCLidership(banner.lidership);
+    addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");

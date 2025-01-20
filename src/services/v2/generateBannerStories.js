@@ -42,20 +42,44 @@ export const generateBannerImageStories = async (data, path) => {
   const districtCordinateX = 540;
   const districtCordinateY = 1580;
 
-  const localCordinateX = 540 - 200;
-  let localCordinateY = 1700;
+  let localCordinateX = 540;
+  let localCordinateY = 1580;
 
-  const addressCordinateX = 540 + 60;
-  let addressCordinateY = 1700;
+  let addressCordinateX = 540;
+  let addressCordinateY = 1580;
 
-  const lidershipCordinateX = 540 - 160;
+  if (banner.address) {
+    localCordinateX -= banner.address.length * banner.district.length;
+    addressCordinateX += banner.address.length * 2;
+  }
+
+  const isLidershipNameSmallerThanDistrict =
+    banner.lidership.length < banner.district.length;
+
+  let basePosition = 520;
+
+  if (isLidershipNameSmallerThanDistrict) {
+    basePosition = 490;
+  }
+
+  let lidershipCordinateX =
+    basePosition - banner.district.length - banner.lidership.length * 10;
   let lidershipCordinateY = 1630;
 
   const dotCordinateX = 540;
   let dotCordinateY = 1630;
 
-  const phoneCordinateX = 540 + 170;
+  let phoneCordinateX = 720;
+  // banner.lidership.length * (banner.lidership.length % 10);
   let phoneCordinateY = 1630;
+
+  console.log(banner.lidership, lidershipCordinateX);
+  console.log(banner.phone, phoneCordinateX);
+  console.log(banner.name);
+
+  // if (!banner.address) {
+  //   phoneCordinateX += banner.district.length * 12;
+  // }
 
   loadImage("./src/banners/template-v2/SEGUNDA - STORY.jpg").then((image) => {
     context.drawImage(image, 0, 0);
@@ -65,14 +89,17 @@ export const generateBannerImageStories = async (data, path) => {
     addGCHour(banner.hour);
     addGCDistrict(banner.district);
 
-    if (!banner.address) {
-    } else {
+    if (banner.address) {
+      localCordinateY += 50;
+      addressCordinateY += 50;
+      lidershipCordinateY += 50;
+      phoneCordinateY += 50;
       addLocal();
       addGCAdress(banner.address);
     }
 
     addGCLidership(banner.lidership);
-    addGCPhone(banner.phone);
+    // addGCPhone(banner.phone);
 
     // sets file type
     const buffer = canvas.toBuffer("image/png");

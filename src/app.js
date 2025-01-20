@@ -27,7 +27,7 @@ const readAndSaveCSVFile = async () => {
         process.stdout.write(
           `\rProgresso: ${percentage}% (${processedCount}/${
             totalBanners * 2
-          }) banners processados`,
+          }) banners processados\n`,
         );
       };
 
@@ -40,14 +40,14 @@ const readAndSaveCSVFile = async () => {
         console.error(`Detalhes do erro: ${error.message}`);
       };
 
-      gcInfo.forEach((gc) => {
-        try {
-          generateBannerImageFeed(gc, PATH_BANNERS);
-          updateProgress();
-        } catch (error) {
-          handleError(error, "Feed", gc);
-        }
-      });
+      // gcInfo.forEach((gc) => {
+      //   try {
+      //     generateBannerImageFeed(gc, PATH_BANNERS);
+      //     updateProgress();
+      //   } catch (error) {
+      //     handleError(error, "Feed", gc);
+      //   }
+      // });
 
       gcInfo.forEach((gc) => {
         try {

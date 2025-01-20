@@ -119,7 +119,7 @@ export const CORDINATES_STORIES = {
       COLOR: "#fff",
     },
     HOUR: {
-      EIXO_X: 660,
+      EIXO_X: 670,
       EIXO_Y: 1462,
     },
     DISTRICT: {
@@ -142,8 +142,8 @@ export const CORDINATES_STORIES = {
       COLOR: "#000",
     },
     HOUR: {
-      EIXO_X: 650,
-      EIXO_Y: 858,
+      EIXO_X: 630,
+      EIXO_Y: 1462,
     },
     DISTRICT: {
       EIXO_X: "",
@@ -165,8 +165,8 @@ export const CORDINATES_STORIES = {
       COLOR: "#000",
     },
     HOUR: {
-      EIXO_X: 650,
-      EIXO_Y: 858,
+      EIXO_X: 630,
+      EIXO_Y: 1462,
     },
     DISTRICT: {
       EIXO_X: "",
@@ -188,8 +188,8 @@ export const CORDINATES_STORIES = {
       COLOR: "#000",
     },
     HOUR: {
-      EIXO_X: 650,
-      EIXO_Y: 858,
+      EIXO_X: 630,
+      EIXO_Y: 1462,
     },
     DISTRICT: {
       EIXO_X: "",
@@ -212,7 +212,7 @@ export const CORDINATES_STORIES = {
     },
     HOUR: {
       EIXO_X: 650,
-      EIXO_Y: 858,
+      EIXO_Y: 1462,
     },
     DISTRICT: {
       EIXO_X: "",

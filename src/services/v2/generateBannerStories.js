@@ -98,7 +98,7 @@ export const generateBannerImageStories = async (data, path) => {
     context.fillStyle = "#222222";
 
     addGCName(banner.name.toUpperCase());
-    // addGCHour(banner.hour);
+    addGCHour(banner.hour);
     // addGCDistrict(banner.district);
 
     // if (banner.address) {

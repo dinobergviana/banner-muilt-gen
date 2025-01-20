@@ -146,8 +146,8 @@ export const CORDINATES_STORIES = {
       EIXO_Y: 1462,
     },
     DISTRICT: {
-      EIXO_X: "",
-      EIXO_Y: "",
+      EIXO_X: 540,
+      EIXO_Y: 1580,
     },
     ADDRESS: {
       EIXO_X: "",
@@ -169,8 +169,8 @@ export const CORDINATES_STORIES = {
       EIXO_Y: 1462,
     },
     DISTRICT: {
-      EIXO_X: "",
-      EIXO_Y: "",
+      EIXO_X: 540,
+      EIXO_Y: 1580,
     },
     ADDRESS: {
       EIXO_X: "",
@@ -192,8 +192,8 @@ export const CORDINATES_STORIES = {
       EIXO_Y: 1462,
     },
     DISTRICT: {
-      EIXO_X: "",
-      EIXO_Y: "",
+      EIXO_X: 540,
+      EIXO_Y: 1580,
     },
     ADDRESS: {
       EIXO_X: "",
@@ -215,8 +215,8 @@ export const CORDINATES_STORIES = {
       EIXO_Y: 1462,
     },
     DISTRICT: {
-      EIXO_X: "",
-      EIXO_Y: "",
+      EIXO_X: 540,
+      EIXO_Y: 1580,
     },
     ADDRESS: {
       EIXO_X: "",

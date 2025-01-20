@@ -99,7 +99,7 @@ export const generateBannerImageStories = async (data, path) => {
 
     addGCName(banner.name.toUpperCase());
     addGCHour(banner.hour);
-    // addGCDistrict(banner.district);
+    addGCDistrict(banner.district);
 
     // if (banner.address) {
     //   localCordinateY += 50;

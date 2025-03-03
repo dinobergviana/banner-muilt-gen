@@ -56,7 +56,7 @@ export const generateBannerImageStories = async (data, path) => {
   const districtCordinateY =
     CORDINATES_STORIES[daysKeys[dayIndex]].DISTRICT.EIXO_Y;
 
-  let localCordinateX = 580;
+  let localCordinateX = 500;
   let localCordinateY = 1580;
 
   let addressCordinateX = 540;
@@ -67,20 +67,17 @@ export const generateBannerImageStories = async (data, path) => {
     addressCordinateX += banner.address.length * 2;
   }
 
-  const isLidershipNameSmallerThanDistrict =
-    banner.lidership.length < banner.district.length;
-
   let basePosition = 600;
 
-  if (isLidershipNameSmallerThanDistrict) {
-    basePosition = 440;
-  }
+  // if (isLidershipNameSmallerThanDistrict) {
+  //   basePosition = 560;
+  // }
 
   let lidershipCordinateX =
     basePosition - banner.district.length - banner.lidership.length * 10;
   let lidershipCordinateY = 1630;
 
-  let phoneCordinateX = 710;
+  let phoneCordinateX = 730;
   let phoneCordinateY = 1630;
 
   // console.log(banner.lidership, lidershipCordinateX);
@@ -175,7 +172,6 @@ export const generateBannerImageStories = async (data, path) => {
     });
 
     context.font = "40px Helvetica";
-    context.textAlign = "center";
     context.fillText("Local:", localCordinateX, localCordinateY);
 
     deregisterAllFonts();
@@ -212,7 +208,7 @@ export const generateBannerImageStories = async (data, path) => {
     });
 
     context.font = "38px Helvetica";
-    context.textAlign = "center";
+    // context.textAlign = "center";
     context.fillText(gcLidership, lidershipCordinateX, lidershipCordinateY);
 
     deregisterAllFonts();
